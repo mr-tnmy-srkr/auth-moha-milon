@@ -2,11 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Home from "./Home/Home";
-import Login from "./Login/Login";
-import Register from "./Register/Register";
-import Root from "./Root/Root";
+import Home from "./components/Home/Home";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import Root from "./components/Root/Root";
 import AuthProvider from "./providers/AuthProvider";
+import Orders from "./components/Orders/Orders";
+import PrivateRoute from "./routes/PrivateRoute";
+import Profile from "./components/Profile/Profile";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +28,22 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/orders",
+        element: (
+          <PrivateRoute>
+            <Orders></Orders>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/profile",
+        element:  <PrivateRoute><Profile></Profile> </PrivateRoute>,
+      },
+      {
+        path: "/dashboard",
+        element:  <PrivateRoute><Dashboard></Dashboard> </PrivateRoute>,
       },
     ],
   },
